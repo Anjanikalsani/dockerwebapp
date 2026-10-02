@@ -1,0 +1,37 @@
+services:
+  devopsdb:
+    container_name: devopsdb
+    image: dbimage:latest
+    ports:
+      - "1115:3306"
+    volumes:
+      - userdata:/var/lib/mysql/
+    environment:
+      MYSQL_ROOT_PASSWORD: "devopspassword"
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.5"
+          memory: 500M
+        limits:
+          cpus: "1"
+          memory: 1000M
+
+  application:
+    container_name: app-cont
+    image: appimage:latest
+    ports:
+      - "1114:8080"
+    depends_on:
+      - devopsdb
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.5"
+          memory: 500M
+        limits:
+          cpus: "1"
+          memory: 1000M
+
+volumes:
+  userdata:
