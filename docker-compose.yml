@@ -1,7 +1,7 @@
 services:
   devopsdb:
     container_name: devopsdb
-    image: dbimage:latest
+    image: anjanidoc1234/flm-oct:db
     ports:
       - "1115:3306"
     volumes:
@@ -19,7 +19,7 @@ services:
 
   application:
     container_name: app-cont
-    image: appimage:latest
+    image: anjanidoc1234/flm-oct:javaapp
     ports:
       - "1114:8080"
     depends_on:
